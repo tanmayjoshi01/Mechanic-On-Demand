@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Mechanic - Mechanic On Demand</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-wrench me-2"></i>Mechanic On Demand
+            </a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="login.html">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-5">
+        <!-- Hero Section -->
+        <section class="bg-primary text-white py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-5 fw-bold mb-3">Book a Mechanic</h1>
+                        <p class="lead">Find and book nearby mechanics instantly. Get your vehicle fixed quickly and professionally.</p>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <i class="fas fa-calendar-plus fa-5x text-warning"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Form Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card shadow-lg border-0">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0"><i class="fas fa-calendar-plus me-2"></i>Service Request Form</h4>
+                            </div>
+                            <div class="card-body p-4">
+                                <form id="bookingForm">
+                                    <!-- Service Type -->
+                                    <div class="mb-4">
+                                        <label for="serviceType" class="form-label fw-semibold">Service Type</label>
+                                        <select class="form-select form-select-lg" id="serviceType" name="serviceType" required>
+                                            <option value="">Select a service type</option>
+                                            <option value="Basic Maintenance">Basic Maintenance</option>
+                                            <option value="Engine Repair">Engine Repair</option>
+                                            <option value="Electrical System">Electrical System</option>
+                                            <option value="Brake Service">Brake Service</option>
+                                            <option value="Transmission">Transmission</option>
+                                            <option value="Emergency Service">Emergency Service</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Vehicle Information -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label for="vehicleMake" class="form-label fw-semibold">Vehicle Make</label>
+                                            <input type="text" class="form-control" id="vehicleMake" name="vehicleMake" 
+                                                   placeholder="e.g., Toyota, Honda, Ford" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="vehicleModel" class="form-label fw-semibold">Vehicle Model</label>
+                                            <input type="text" class="form-control" id="vehicleModel" name="vehicleModel" 
+                                                   placeholder="e.g., Camry, Civic, F-150" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label for="vehicleYear" class="form-label fw-semibold">Year</label>
+                                            <input type="number" class="form-control" id="vehicleYear" name="vehicleYear" 
+                                                   placeholder="e.g., 2020" min="1990" max="2024" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="vehicleColor" class="form-label fw-semibold">Color</label>
+                                            <input type="text" class="form-control" id="vehicleColor" name="vehicleColor" 
+                                                   placeholder="e.g., Red, Blue, Silver">
+                                        </div>
+                                    </div>
+
+                                    <!-- Problem Description -->
+                                    <div class="mb-4">
+                                        <label for="description" class="form-label fw-semibold">Problem Description</label>
+                                        <textarea class="form-control" id="description" name="description" rows="4" 
+                                                  placeholder="Describe the issue with your vehicle in detail..." required></textarea>
+                                    </div>
+
+                                    <!-- Location -->
+                                    <div class="mb-4">
+                                        <label for="location" class="form-label fw-semibold">Service Location</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                            </span>
+                                            <input type="text" class="form-control" id="location" name="location" 
+                                                   placeholder="Enter your address or current location" required>
+                                            <button class="btn btn-outline-primary" type="button" id="getCurrentLocation">
+                                                <i class="fas fa-crosshairs me-1"></i>Use Current Location
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Preferred Date & Time -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label for="preferredDate" class="form-label fw-semibold">Preferred Date</label>
+                                            <input type="date" class="form-control" id="preferredDate" name="preferredDate" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="preferredTime" class="form-label fw-semibold">Preferred Time</label>
+                                            <select class="form-select" id="preferredTime" name="preferredTime" required>
+                                                <option value="">Select time</option>
+                                                <option value="08:00">8:00 AM</option>
+                                                <option value="09:00">9:00 AM</option>
+                                                <option value="10:00">10:00 AM</option>
+                                                <option value="11:00">11:00 AM</option>
+                                                <option value="12:00">12:00 PM</option>
+                                                <option value="13:00">1:00 PM</option>
+                                                <option value="14:00">2:00 PM</option>
+                                                <option value="15:00">3:00 PM</option>
+                                                <option value="16:00">4:00 PM</option>
+                                                <option value="17:00">5:00 PM</option>
+                                                <option value="18:00">6:00 PM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Contact Information -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <label for="contactName" class="form-label fw-semibold">Contact Name</label>
+                                            <input type="text" class="form-control" id="contactName" name="contactName" 
+                                                   placeholder="Your full name" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="contactPhone" class="form-label fw-semibold">Contact Phone</label>
+                                            <input type="tel" class="form-control" id="contactPhone" name="contactPhone" 
+                                                   placeholder="Your phone number" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="contactEmail" class="form-label fw-semibold">Email Address</label>
+                                        <input type="email" class="form-control" id="contactEmail" name="contactEmail" 
+                                               placeholder="Your email address" required>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary btn-lg" id="submitBooking">
+                                            <span class="spinner-border spinner-border-sm me-2 d-none" id="bookingSpinner"></span>
+                                            <i class="fas fa-paper-plane me-2" id="bookingIcon"></i>
+                                            Submit Booking Request
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="col-lg-4">
+                        <!-- Pricing Card -->
+                        <div class="card shadow-lg border-0 mb-4">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0"><i class="fas fa-dollar-sign me-2"></i>Service Pricing</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="pricingInfo">
+                                    <p class="text-muted">Select a service type to see pricing</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Available Mechanics -->
+                        <div class="card shadow-lg border-0">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="mb-0"><i class="fas fa-users me-2"></i>Available Mechanics</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="mechanicsList">
+                                    <p class="text-muted">Loading nearby mechanics...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-wrench me-2"></i>Mechanic On Demand</h5>
+                    <p class="text-muted">Connecting you with trusted mechanics when you need them most.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">&copy; 2024 Mechanic On Demand. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/booking.js"></script>
+</body>
+</html>
