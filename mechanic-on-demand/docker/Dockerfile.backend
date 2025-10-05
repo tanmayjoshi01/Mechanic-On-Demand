@@ -1,0 +1,38 @@
+# 🔧 Mechanic On Demand - Backend Dockerfile
+# This Dockerfile creates a container for the Spring Boot backend application
+
+# Use OpenJDK 11 as base image
+FROM openjdk:11-jdk-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install Maven
+RUN apt-get update && \
+    apt-get install -y maven && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy Maven configuration files
+COPY backend/pom.xml .
+COPY backend/src ./src
+
+# Download dependencies (this layer will be cached if pom.xml doesn't change)
+RUN mvn dependency:go-offline -B
+
+# Build the application
+RUN mvn clean package -DskipTests
+
+# Expose port 8080
+EXPOSE 8080
+
+# Set environment variables
+ENV SPRING_PROFILES_ACTIVE=docker
+ENV MYSQL_HOST=mysql
+ENV MYSQL_PORT=3306
+ENV MYSQL_DATABASE=mechanic_ondemand
+ENV MYSQL_USERNAME=root
+ENV MYSQL_PASSWORD=password
+
+# Run the application
+CMD ["java", "-jar", "target/mechanic-on-demand-1.0.0.jar"]

@@ -1,0 +1,69 @@
+# 🛠️ Development Docker Compose Configuration
+# This file is for development with hot reloading and debugging
+
+version: '3.8'
+
+services:
+  # MySQL Database (same as production)
+  mysql:
+    image: mysql:8.0
+    container_name: mechanic-mysql-dev
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mechanic_ondemand
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_dev_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - mechanic-dev-network
+
+  # Backend with development configuration
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    container_name: mechanic-backend-dev
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+      - "5005:5005"  # Debug port
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: mechanic_ondemand
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
+      JAVA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - mysql
+    networks:
+      - mechanic-dev-network
+
+  # Frontend with development server
+  frontend:
+    image: nginx:alpine
+    container_name: mechanic-frontend-dev
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+      - ./docker/nginx.dev.conf:/etc/nginx/nginx.conf
+    networks:
+      - mechanic-dev-network
+
+volumes:
+  mysql_dev_data:
+    driver: local
+
+networks:
+  mechanic-dev-network:
+    driver: bridge

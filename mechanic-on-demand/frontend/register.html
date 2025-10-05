@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Mechanic On Demand</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-wrench me-2"></i>Mechanic On Demand
+            </a>
+        </div>
+    </nav>
+
+    <!-- Registration Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <h2 class="fw-bold text-primary">Create Account</h2>
+                                <p class="text-muted">Join our community of customers and mechanics</p>
+                            </div>
+
+                            <!-- User Type Selection -->
+                            <div class="mb-4">
+                                <div class="btn-group w-100" role="group">
+                                    <input type="radio" class="btn-check" name="userType" id="customer" value="customer" checked>
+                                    <label class="btn btn-outline-primary" for="customer">
+                                        <i class="fas fa-user me-2"></i>I'm a Customer
+                                    </label>
+                                    
+                                    <input type="radio" class="btn-check" name="userType" id="mechanic" value="mechanic">
+                                    <label class="btn btn-outline-primary" for="mechanic">
+                                        <i class="fas fa-wrench me-2"></i>I'm a Mechanic
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Registration Form -->
+                            <form id="registerForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" 
+                                               placeholder="Enter first name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" name="lastName" 
+                                               placeholder="Enter last name" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-envelope"></i>
+                                        </span>
+                                        <input type="email" class="form-control" id="email" name="email" 
+                                               placeholder="Enter your email" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-phone"></i>
+                                        </span>
+                                        <input type="tel" class="form-control" id="phone" name="phone" 
+                                               placeholder="Enter your phone number" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-lock"></i>
+                                        </span>
+                                        <input type="password" class="form-control" id="password" name="password" 
+                                               placeholder="Create a password" required minlength="6">
+                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div class="form-text">Password must be at least 6 characters long.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-lock"></i>
+                                        </span>
+                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" 
+                                               placeholder="Confirm your password" required>
+                                    </div>
+                                </div>
+
+                                <!-- Mechanic-specific fields -->
+                                <div id="mechanicFields" class="d-none">
+                                    <div class="mb-3">
+                                        <label for="specialization" class="form-label">Specialization</label>
+                                        <select class="form-select" id="specialization" name="specialization">
+                                            <option value="">Select your specialization</option>
+                                            <option value="Engine Specialist">Engine Specialist</option>
+                                            <option value="Electrical Systems">Electrical Systems</option>
+                                            <option value="Brake Specialist">Brake Specialist</option>
+                                            <option value="Transmission">Transmission</option>
+                                            <option value="General Maintenance">General Maintenance</option>
+                                            <option value="Emergency Service">Emergency Service</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="experienceYears" class="form-label">Years of Experience</label>
+                                        <input type="number" class="form-control" id="experienceYears" name="experienceYears" 
+                                               placeholder="Enter years of experience" min="0" max="50">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="hourlyRate" class="form-label">Hourly Rate ($)</label>
+                                        <input type="number" class="form-control" id="hourlyRate" name="hourlyRate" 
+                                               placeholder="Enter your hourly rate" min="0" step="0.01">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Address (Optional)</label>
+                                    <textarea class="form-control" id="address" name="address" rows="2" 
+                                              placeholder="Enter your address"></textarea>
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="termsAndConditions" required>
+                                    <label class="form-check-label" for="termsAndConditions">
+                                        I agree to the <a href="#" class="text-primary">Terms and Conditions</a> and 
+                                        <a href="#" class="text-primary">Privacy Policy</a>
+                                    </label>
+                                </div>
+
+                                <div class="d-grid mb-3">
+                                    <button type="submit" class="btn btn-primary btn-lg" id="registerBtn">
+                                        <span class="spinner-border spinner-border-sm me-2 d-none" id="registerSpinner"></span>
+                                        <i class="fas fa-user-plus me-2" id="registerIcon"></i>
+                                        Create Account
+                                    </button>
+                                </div>
+
+                                <div class="text-center">
+                                    <p class="mb-0">Already have an account? 
+                                        <a href="login.html" class="text-primary text-decoration-none fw-semibold">
+                                            Sign in here
+                                        </a>
+                                    </p>
+                                </div>
+                            </form>
+
+                            <!-- Alert Messages -->
+                            <div id="alertContainer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2024 Mechanic On Demand. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/auth.js"></script>
+</body>
+</html>

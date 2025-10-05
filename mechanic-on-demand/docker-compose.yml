@@ -1,0 +1,92 @@
+# 🐳 Mechanic On Demand - Docker Compose Configuration
+# This file defines all services needed to run the application
+
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: mechanic-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mechanic_ondemand
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - mechanic-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Spring Boot Backend
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.backend
+    container_name: mechanic-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: mechanic_ondemand
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - mechanic-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/pricing"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Frontend (Nginx)
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.frontend
+    container_name: mechanic-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - mechanic-network
+
+  # Redis (for caching and session management)
+  redis:
+    image: redis:7-alpine
+    container_name: mechanic-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - mechanic-network
+    command: redis-server --appendonly yes
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  mechanic-network:
+    driver: bridge
