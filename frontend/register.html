@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Mechanic On Demand</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-wrench"></i> Mechanic On Demand
+            </a>
+        </div>
+    </nav>
+
+    <!-- Registration Form -->
+    <div class="container">
+        <div class="form-container" style="max-width: 600px;">
+            <h2 class="text-center"><i class="fas fa-user-plus"></i> Register</h2>
+            
+            <!-- Alert for messages -->
+            <div id="alertMessage" class="alert d-none" role="alert"></div>
+            
+            <form id="registerForm">
+                <!-- Role Selection -->
+                <div class="mb-3">
+                    <label class="form-label">I am a:</label>
+                    <div class="btn-group w-100" role="group">
+                        <input type="radio" class="btn-check" name="role" id="roleCustomer" value="CUSTOMER" checked>
+                        <label class="btn btn-outline-primary" for="roleCustomer">
+                            <i class="fas fa-user"></i> Customer
+                        </label>
+                        
+                        <input type="radio" class="btn-check" name="role" id="roleMechanic" value="MECHANIC">
+                        <label class="btn btn-outline-primary" for="roleMechanic">
+                            <i class="fas fa-wrench"></i> Mechanic
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" minlength="6" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <textarea class="form-control" id="address" rows="2"></textarea>
+                </div>
+                
+                <!-- Mechanic-specific fields (hidden by default) -->
+                <div id="mechanicFields" style="display: none;">
+                    <div class="mb-3">
+                        <label for="specialty" class="form-label">Specialty</label>
+                        <select class="form-select" id="specialty">
+                            <option value="All">All Vehicles</option>
+                            <option value="Car">Car</option>
+                            <option value="Bike">Bike</option>
+                            <option value="Truck">Truck</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="hourlyRate" class="form-label">Hourly Rate ($)</label>
+                        <input type="number" class="form-control" id="hourlyRate" value="50" step="0.01">
+                    </div>
+                </div>
+                
+                <!-- Location -->
+                <div class="mb-3">
+                    <button type="button" class="btn btn-outline-secondary w-100" onclick="getLocation()">
+                        <i class="fas fa-map-marker-alt"></i> Get My Location
+                    </button>
+                    <small class="text-muted">This helps us find nearby mechanics/customers</small>
+                    <input type="hidden" id="latitude">
+                    <input type="hidden" id="longitude">
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100 mb-3">
+                    <i class="fas fa-user-plus"></i> Register
+                </button>
+                
+                <div class="text-center">
+                    <p>Already have an account? <a href="login.html">Login here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="spinner-container" id="loadingSpinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Show/hide mechanic fields based on role selection
+        document.querySelectorAll('input[name="role"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const mechanicFields = document.getElementById('mechanicFields');
+                if (this.value === 'MECHANIC') {
+                    mechanicFields.style.display = 'block';
+                } else {
+                    mechanicFields.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

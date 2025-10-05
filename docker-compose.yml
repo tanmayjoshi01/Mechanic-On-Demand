@@ -1,0 +1,87 @@
+# ==========================================
+# Docker Compose Configuration
+# Mechanic On Demand Application
+# ==========================================
+
+version: '3.8'
+
+services:
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0
+    container_name: mechanic_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: mechanic_on_demand
+      MYSQL_USER: mechanic_user
+      MYSQL_PASSWORD: mechanic_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - mechanic-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Spring Boot Backend Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mechanic_backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # Database connection settings
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mechanic_on_demand?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root123
+      
+      # JPA/Hibernate settings
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: true
+      
+      # JWT settings
+      JWT_SECRET: MechanicOnDemandSecretKeyForJWTTokenGeneration2024
+      JWT_EXPIRATION: 86400000
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - mechanic-network
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/api/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Nginx Web Server for Frontend
+  frontend:
+    image: nginx:alpine
+    container_name: mechanic_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - backend
+    networks:
+      - mechanic-network
+
+# Volumes for persistent data
+volumes:
+  mysql_data:
+    driver: local
+
+# Networks
+networks:
+  mechanic-network:
+    driver: bridge
