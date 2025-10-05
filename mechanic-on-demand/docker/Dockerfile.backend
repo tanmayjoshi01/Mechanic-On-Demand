@@ -1,0 +1,47 @@
+# Multi-stage Dockerfile for Spring Boot Backend
+# Stage 1: Build the application
+FROM maven:3.8.6-openjdk-11-slim AS build
+
+# Set working directory
+WORKDIR /app
+
+# Copy pom.xml and download dependencies
+COPY backend/pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copy source code
+COPY backend/src ./src
+
+# Build the application
+RUN mvn clean package -DskipTests
+
+# Stage 2: Create runtime image
+FROM openjdk:11-jre-slim
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create app user
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
+# Set working directory
+WORKDIR /app
+
+# Copy the built JAR from build stage
+COPY --from=build /app/target/*.jar app.jar
+
+# Change ownership to app user
+RUN chown -R appuser:appuser /app
+USER appuser
+
+# Expose port
+EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/api/auth/me || exit 1
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]

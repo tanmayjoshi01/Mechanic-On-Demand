@@ -1,0 +1,63 @@
+# Docker Compose configuration for Development Environment
+version: '3.8'
+
+services:
+  # MySQL Database (Development)
+  mysql-dev:
+    image: mysql:8.0
+    container_name: mechanic_mysql_dev
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mechanic_on_demand_dev
+      MYSQL_USER: mechanic_user
+      MYSQL_PASSWORD: mechanic_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_dev_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - mechanic_dev_network
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Redis (Development)
+  redis-dev:
+    image: redis:7-alpine
+    container_name: mechanic_redis_dev
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_dev_data:/data
+    networks:
+      - mechanic_dev_network
+
+  # phpMyAdmin (Development)
+  phpmyadmin-dev:
+    image: phpmyadmin/phpmyadmin
+    container_name: mechanic_phpmyadmin_dev
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql-dev
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: password
+    ports:
+      - "8082:80"
+    depends_on:
+      - mysql-dev
+    networks:
+      - mechanic_dev_network
+
+# Networks
+networks:
+  mechanic_dev_network:
+    driver: bridge
+
+# Volumes
+volumes:
+  mysql_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans - Mechanic On Demand</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-wrench me-2"></i>Mechanic On Demand
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="pricing.html">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light ms-2" href="register.html">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pricing Header -->
+    <section class="pricing-header py-5" style="margin-top: 80px;">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="display-4 fw-bold mb-4">Choose Your Plan</h1>
+                    <p class="lead text-muted mb-5">
+                        Flexible pricing options to meet your vehicle service needs. 
+                        Save more with annual plans!
+                    </p>
+                    
+                    <!-- Billing Toggle -->
+                    <div class="d-flex justify-content-center mb-5">
+                        <div class="btn-group" role="group">
+                            <input type="radio" class="btn-check" name="billing" id="monthly" autocomplete="off" checked>
+                            <label class="btn btn-outline-primary" for="monthly">Monthly</label>
+                            
+                            <input type="radio" class="btn-check" name="billing" id="yearly" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="yearly">Yearly <span class="badge bg-success ms-1">Save 20%</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Basic Plan -->
+                <div class="col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm pricing-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="pricing-badge mb-3">
+                                <span class="badge bg-light text-dark">Basic</span>
+                            </div>
+                            <h3 class="fw-bold mb-3">Basic Plan</h3>
+                            <div class="pricing-price mb-4">
+                                <span class="display-4 fw-bold text-primary monthly-price">$29.99</span>
+                                <span class="display-4 fw-bold text-primary yearly-price d-none">$299.99</span>
+                                <span class="text-muted">/month</span>
+                            </div>
+                            <p class="text-muted mb-4">Perfect for occasional vehicle maintenance</p>
+                            
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span class="monthly-feature">5 bookings per month</span>
+                                    <span class="yearly-feature d-none">5 bookings per month</span>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Basic support
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Standard response time
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Mobile app access
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-times text-muted me-2"></i>
+                                    <span class="text-muted">Priority support</span>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-times text-muted me-2"></i>
+                                    <span class="text-muted">Emergency service</span>
+                                </li>
+                            </ul>
+                            
+                            <div class="d-grid">
+                                <a href="register.html" class="btn btn-outline-primary btn-lg">
+                                    Get Started
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="col-lg-4">
+                    <div class="card h-100 border-0 shadow-lg pricing-card featured">
+                        <div class="card-body p-4 text-center position-relative">
+                            <div class="pricing-badge mb-3">
+                                <span class="badge bg-warning text-dark">Most Popular</span>
+                            </div>
+                            <h3 class="fw-bold mb-3">Premium Plan</h3>
+                            <div class="pricing-price mb-4">
+                                <span class="display-4 fw-bold text-primary monthly-price">$49.99</span>
+                                <span class="display-4 fw-bold text-primary yearly-price d-none">$499.99</span>
+                                <span class="text-muted">/month</span>
+                            </div>
+                            <p class="text-muted mb-4">Best for regular vehicle users</p>
+                            
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span class="monthly-feature">Unlimited bookings</span>
+                                    <span class="yearly-feature d-none">Unlimited bookings</span>
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Priority support
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Fast response time
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Mobile app access
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Emergency service
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Advanced tracking
+                                </li>
+                            </ul>
+                            
+                            <div class="d-grid">
+                                <a href="register.html" class="btn btn-primary btn-lg">
+                                    Get Started
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm pricing-card">
+                        <div class="card-body p-4 text-center">
+                            <div class="pricing-badge mb-3">
+                                <span class="badge bg-dark">Enterprise</span>
+                            </div>
+                            <h3 class="fw-bold mb-3">Enterprise Plan</h3>
+                            <div class="pricing-price mb-4">
+                                <span class="display-4 fw-bold text-primary">Custom</span>
+                            </div>
+                            <p class="text-muted mb-4">For businesses with multiple vehicles</p>
+                            
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Custom booking limits
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    24/7 dedicated support
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Instant response time
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    API access
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Custom integrations
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Fleet management
+                                </li>
+                            </ul>
+                            
+                            <div class="d-grid">
+                                <button class="btn btn-outline-dark btn-lg" data-bs-toggle="modal" data-bs-target="#contactModal">
+                                    Contact Sales
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Comparison -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-5 fw-bold">Compare Features</h2>
+                    <p class="lead text-muted">See what's included in each plan</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Features</th>
+                                    <th class="text-center">Basic</th>
+                                    <th class="text-center">Premium</th>
+                                    <th class="text-center">Enterprise</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Monthly Bookings</td>
+                                    <td class="text-center">5</td>
+                                    <td class="text-center">Unlimited</td>
+                                    <td class="text-center">Custom</td>
+                                </tr>
+                                <tr>
+                                    <td>Response Time</td>
+                                    <td class="text-center">Standard</td>
+                                    <td class="text-center">Fast</td>
+                                    <td class="text-center">Instant</td>
+                                </tr>
+                                <tr>
+                                    <td>Support Level</td>
+                                    <td class="text-center">Basic</td>
+                                    <td class="text-center">Priority</td>
+                                    <td class="text-center">24/7 Dedicated</td>
+                                </tr>
+                                <tr>
+                                    <td>Emergency Service</td>
+                                    <td class="text-center"><i class="fas fa-times text-muted"></i></td>
+                                    <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                                    <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Mobile App</td>
+                                    <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                                    <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                                    <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>API Access</td>
+                                    <td class="text-center"><i class="fas fa-times text-muted"></i></td>
+                                    <td class="text-center"><i class="fas fa-times text-muted"></i></td>
+                                    <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-5 fw-bold">Frequently Asked Questions</h2>
+                    <p class="lead text-muted">Everything you need to know about our pricing</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Can I change my plan anytime?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any billing differences.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    What happens if I exceed my monthly bookings?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    For Basic plan users, additional bookings beyond your monthly limit are charged at $15 per booking. Premium plan users have unlimited bookings included.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Is there a free trial available?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes! We offer a 7-day free trial for new users. You can try any plan risk-free and cancel anytime during the trial period.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    How does the yearly discount work?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    When you choose yearly billing, you save 20% compared to monthly billing. This discount is automatically applied at checkout.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Contact Sales</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Interested in our Enterprise plan? Contact our sales team for a custom quote.</p>
+                    <div class="mb-3">
+                        <label for="contactEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="contactEmail" placeholder="your@email.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="contactMessage" class="form-label">Message</label>
+                        <textarea class="form-control" id="contactMessage" rows="3" placeholder="Tell us about your needs..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">
+                        <i class="fas fa-wrench me-2"></i>Mechanic On Demand
+                    </h5>
+                    <p class="text-muted">
+                        Your trusted partner for all vehicle repair needs. 
+                        Fast, reliable, and professional service.
+                    </p>
+                </div>
+                
+                <div class="col-lg-2 mb-4">
+                    <h6 class="fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-muted text-decoration-none">Home</a></li>
+                        <li><a href="pricing.html" class="text-muted text-decoration-none">Pricing</a></li>
+                        <li><a href="login.html" class="text-muted text-decoration-none">Login</a></li>
+                        <li><a href="register.html" class="text-muted text-decoration-none">Sign Up</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 mb-4">
+                    <h6 class="fw-bold mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">Help Center</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Contact Us</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Terms of Service</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 mb-4">
+                    <h6 class="fw-bold mb-3">Follow Us</h6>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-muted"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-muted mb-0">&copy; 2024 Mechanic On Demand. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">Made with <i class="fas fa-heart text-danger"></i> for car owners</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/pricing.js"></script>
+</body>
+</html>
