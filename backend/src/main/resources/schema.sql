@@ -1,0 +1,37 @@
+-- Schema for Mechanic On Demand
+CREATE TABLE IF NOT EXISTS users (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  role VARCHAR(20) NOT NULL,
+  full_name VARCHAR(255) NOT NULL,
+  phone VARCHAR(50),
+  latitude DOUBLE,
+  longitude DOUBLE,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS mechanic_profiles (
+  id BIGINT PRIMARY KEY,
+  specialties VARCHAR(255),
+  available BOOLEAN DEFAULT TRUE,
+  hourly_rate DOUBLE,
+  CONSTRAINT fk_mech_user FOREIGN KEY (id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS bookings (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  customer_id BIGINT NOT NULL,
+  mechanic_id BIGINT NULL,
+  status VARCHAR(20) NOT NULL,
+  latitude DOUBLE NOT NULL,
+  longitude DOUBLE NOT NULL,
+  issue_description TEXT,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  accepted_at TIMESTAMP NULL,
+  completed_at TIMESTAMP NULL,
+  CONSTRAINT fk_booking_customer FOREIGN KEY (customer_id) REFERENCES users(id),
+  CONSTRAINT fk_booking_mechanic FOREIGN KEY (mechanic_id) REFERENCES users(id)
+);

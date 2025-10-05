@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - Mechanic On Demand</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-light bg-white border-bottom">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Mechanic On Demand</a>
+  </div>
+</nav>
+
+<div class="container py-5" style="max-width: 480px;">
+  <div class="card p-4">
+    <h3 class="mb-3">Login</h3>
+    <form id="loginForm">
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" required>
+      </div>
+      <button class="btn btn-primary w-100" type="submit">Login</button>
+    </form>
+    <hr>
+    <p class="mb-1">New here?</p>
+    <a href="#" id="registerLink">Create an account</a>
+  </div>
+</div>
+
+<script>
+const apiBase = 'http://localhost:8080/api';
+
+async function login(email, password) {
+  const res = await fetch(`${apiBase}/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  });
+  if (!res.ok) { throw new Error('Login failed'); }
+  return res.json();
+}
+
+async function register(fullName, email, phone, password, role) {
+  const res = await fetch(`${apiBase}/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fullName, email, phone, password, role })
+  });
+  if (!res.ok) { throw new Error('Register failed'); }
+  return res.json();
+}
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  try {
+    const data = await login(email, password);
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('userId', data.userId);
+    localStorage.setItem('role', data.role);
+    window.location.href = 'booking.html';
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+document.getElementById('registerLink').addEventListener('click', async (e) => {
+  e.preventDefault();
+  const fullName = prompt('Full name:');
+  const phone = prompt('Phone:');
+  const email = prompt('Email:');
+  const password = prompt('Password:');
+  const role = prompt('Role (CUSTOMER/MECHANIC):', 'CUSTOMER');
+  if (!fullName || !email || !password || !role) return;
+  try {
+    const data = await register(fullName, email, phone, password, role);
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('userId', data.userId);
+    localStorage.setItem('role', data.role);
+    window.location.href = 'booking.html';
+  } catch (err) {
+    alert(err.message);
+  }
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
