@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Mechanics - Mechanic On Demand</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-wrench"></i> Mechanic On Demand
+            </a>
+            <div class="ms-auto">
+                <a href="dashboard.html" class="btn btn-outline-light btn-sm">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h2>Find Nearby Mechanics</h2>
+                <p class="text-muted">Search for available mechanics in your area</p>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="number" class="form-control" id="searchRadius" placeholder="Search radius (km)" value="10">
+                    <button class="btn btn-primary" onclick="searchMechanics()">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                    <button class="btn btn-outline-secondary" onclick="getLocation()">
+                        <i class="fas fa-map-marker-alt"></i> Use My Location
+                    </button>
+                </div>
+                <input type="hidden" id="latitude">
+                <input type="hidden" id="longitude">
+            </div>
+            <div class="col-md-4">
+                <select class="form-select" id="filterSpecialty">
+                    <option value="">All Specialties</option>
+                    <option value="Car">Car</option>
+                    <option value="Bike">Bike</option>
+                    <option value="Truck">Truck</option>
+                    <option value="All">All Vehicles</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Mechanics List -->
+        <div class="row" id="mechanicsList">
+            <div class="col-md-12 text-center">
+                <p class="text-muted">Click "Use My Location" and "Search" to find mechanics</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Book Mechanic</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="bookingForm">
+                        <input type="hidden" id="mechanicId">
+                        <input type="hidden" id="customerId">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Vehicle Type</label>
+                            <select class="form-select" id="vehicleType" required>
+                                <option value="">Select type</option>
+                                <option value="Car">Car</option>
+                                <option value="Bike">Bike</option>
+                                <option value="Truck">Truck</option>
+                                <option value="Van">Van</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Vehicle Model</label>
+                            <input type="text" class="form-control" id="vehicleModel" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Problem Description</label>
+                            <textarea class="form-control" id="problemDescription" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Subscription Type</label>
+                            <select class="form-select" id="subscriptionType" required>
+                                <option value="HOURLY">Hourly - $<span id="hourlyRate">50</span>/hr</option>
+                                <option value="MONTHLY">Monthly - $<span id="monthlyRate">999</span></option>
+                                <option value="YEARLY">Yearly - $<span id="yearlyRate">9999</span></option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">Confirm Booking</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/mechanics.js"></script>
+</body>
+</html>
